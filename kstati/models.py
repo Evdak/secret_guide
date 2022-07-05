@@ -16,3 +16,6 @@ class Kstati(models.Model):
     class Meta:
         verbose_name = "Кстати"
         verbose_name_plural = "Кстати"
+
+    def __str__(self) -> str:
+        return f"{self.quest_name} {self.question_number}"
