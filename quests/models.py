@@ -1,4 +1,3 @@
-from tabnanny import verbose
 from django.db import models
 
 # Create your models here.
@@ -7,7 +6,7 @@ from django.db import models
 class IconsWhy(models.Model):
     header = models.CharField('Заголовок', max_length=255)
     description = models.CharField('Описание', max_length=255)
-    file = models.FileField('Иконка')
+    file = models.FileField('Иконка', upload_to='icons_why')
 
     def __str__(self) -> str:
         return f'{self.header}, {self.description[:10]}...'
@@ -20,7 +19,7 @@ class IconsWhy(models.Model):
 class IconsWhen(models.Model):
     header = models.CharField('Заголовок', max_length=255)
     description = models.CharField('Описание', max_length=255)
-    file = models.FileField('Иконка')
+    file = models.FileField('Иконка', upload_to='icons_when')
 
     def __str__(self) -> str:
         return f'{self.header}, {self.description[:10]}...'
@@ -32,7 +31,7 @@ class IconsWhen(models.Model):
 
 class Photo(models.Model):
     name = models.CharField('Название фото', max_length=255)
-    file = models.FileField('Файл с фото')
+    file = models.FileField('Файл с фото', upload_to='photo')
 
     def __str__(self) -> str:
         return self.name
@@ -44,7 +43,7 @@ class Photo(models.Model):
 
 class Video(models.Model):
     name = models.CharField('Название видео', max_length=255)
-    file = models.FileField('Файл с видео')
+    file = models.FileField('Файл с видео', upload_to='video')
 
     def __str__(self) -> str:
         return self.name
@@ -57,7 +56,7 @@ class Video(models.Model):
 class Review(models.Model):
     name = models.CharField('Имя', max_length=255)
     text = models.TextField('Отзыв')
-    photo = models.FileField('Фото')
+    photo = models.FileField('Фото', upload_to='reviews')
 
     def __str__(self) -> str:
         return f"{self.name}, {self.text[:20]}..."
