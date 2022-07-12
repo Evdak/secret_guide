@@ -2,3 +2,5 @@
 *.sqlite3
 
 .DS_Store
+
+secret_guide/settings.py
