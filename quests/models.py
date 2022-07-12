@@ -57,6 +57,7 @@ class Review(models.Model):
     name = models.CharField('Имя', max_length=255)
     text = models.TextField('Отзыв')
     photo = models.FileField('Фото', upload_to='reviews')
+    rate = models.PositiveSmallIntegerField('Оценка')
 
     def __str__(self) -> str:
         return f"{self.name}, {self.text[:20]}..."
@@ -72,6 +73,7 @@ class Quest(models.Model):
     description = models.CharField('Описание квеста', max_length=255)
     price = models.PositiveIntegerField('Цена')
     what_waits_you = models.TextField('Что вас ждет')
+    main_photo = models.FileField('Обложка', upload_to='main_photo')
     why_it_need = models.ManyToManyField(
         IconsWhy,
         verbose_name='Иконки почему'
