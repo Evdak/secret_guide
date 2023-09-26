@@ -1,0 +1,291 @@
+{# Load the tag library #}
+{% load django_bootstrap5 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{quest.name_rus}}</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Finlandica:wght@400;500;600;700&display=swap');
+
+        .fit {
+            width: fit-content;
+            max-width: 90vw;
+        }
+
+        .grid-col-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            justify-content: center;
+        }
+
+        .embed-responsive-item {
+            max-width: 95vw;
+            max-height: 95vh;
+        }
+
+        .icon_text_group-text>h3 {
+            /* font-family: Gilroy; */
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .icont_text_group-img {
+            min-width: 45px;
+            max-width: 50px;
+            min-height: 50px;
+            max-height: 50px;
+            margin-top: 3px;
+            padding-left: 10px;
+            margin-right: 15px;
+            position: relative;
+            display: flex;
+            align-items: center;
+
+        }
+
+        .icont_text_group-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: top center
+        }
+
+        * {
+            font-family: 'Finlandica', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+
+
+
+    <body>
+        <div class="bg-light mb-3 py-5">
+            <div class="container text-center">
+                <div
+                    class="col d-flex justify-content-center align-content-center flex-column flex-wrap align-items-center">
+                    <div class="row">
+                        <h1 class="text-primary fw-bold">
+                            {{ quest.name_rus }}
+                        </h1>
+                    </div>
+
+                    <div class="row rounded bg-primary py-2 text-center text-white mt-3 fit text-center">
+                        <h5 class="text-white">
+                            {{ quest.description }}
+                        </h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor"
+            class="bi bi-arrow-left-circle" viewBox="0 0 16 16" onclick="window.open('/quest/','_self','resizable=yes')"
+            style="
+            padding: 1%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        ">
+            <path fill-rule="evenodd"
+                d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-4.5-.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z">
+            </path>
+        </svg>
+
+        </div>
+        <div class="container py-3">
+            <h2 class="fw-bold mb-2 text-center mb-3">В этом маршруте вы узнаете:</h2>
+            <!-- <p>Посетите легендарное место, откуда началась история великого города на Неве.</p>
+            <p>Узнайте легенды и разгадайте тайны Петропавловской крепости:</p>
+            <ul class="list-group list-group-flush">
+                <li>кто охраняет город с высоты птичьего полета?</li>
+                <li>в чем причина непропорциональности памятника Петру Первому?</li>
+                <li>откуда здесь 12 стульев, и кто был узником бастиона?</li>
+            </ul>
+            <br>
+            <p>Прогулка длится от 1,5 до 2 часов.</p>
+            <p>Не забудьте в прохладную погоду потеплее одеться, и зарядите свои телефоны, чтобы не прерывать
+                увлекательную
+                прогулку.</p> -->
+
+            <!-- {{quest.what_waits_you}} -->
+            {% for p in quest.what_waits_you_list %}
+            <h6>{{p}}</h6>
+            {% endfor %}
+        </div>
+        <div class="container my-3">
+            <h2 class="text-center fw-bold my-4">Почему стоит идти на прогулку:</h2>
+            <br>
+
+
+            <div class="row">
+                {% for icon in quest.why_it_need.all %}
+                <div class="col-sm-12 col-md-4 d-flex align-items-center">
+                    <div class="icont_text_group-img ">
+
+                        <img src="{{icon.file.url}}" alt="{{icon.name}}">
+
+                    </div>
+                    <div class="icon_text_group-text">
+                        <h3 class="fw-bold">{{icon.header}}</h3>
+                        <p>{{icon.description}}</p>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <h2 class="text-dark text-center fw-bold my-5">
+                Проходя маршрут вы увидите
+            </h2>
+            <div class="container d-flex justify-content-center">
+                <div class="col-sm-12 col-md-6">
+                    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                                class="active" aria-current="true" aria-label="Slide 1"></button>
+                            {% for el in quest.photo.all %}
+                            {% if not forloop.last%}
+                            <button type="button" data-bs-target="#carouselExampleIndicators"
+                                data-bs-slide-to="{{forloop.counter}}" aria-current="true"
+                                aria-label="Slide {{forloop.counter}}"></button>
+                            {% endif %}
+                            {% endfor %}
+
+                        </div>
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="{{quest.photo.first.file.url}}" class="d-block w-100" alt="{{icon.name}}">
+                            </div>
+                            <!-- <div class="carousel-item">
+                        <img src="ph/Centr otkrytij/photo/2.jpg" class="d-block w-100" alt="">
+                    </div> -->
+                            {% for ph in quest.photo.all %}
+                            {% if not forloop.first%}
+                            <div class="carousel-item">
+                                <img src="{{ph.file.url}}" class="d-block w-100" alt="">
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% if quest.video.first %}
+
+        <div class="container text-center my-3">
+            <h2 class="text-dark my-3 fw-bold mt-5">
+                Видео обзор маршрута
+            </h2>
+            <h6 class="text-primary mb-3 mt-1">
+                Советуем посмотреть
+            </h6>
+            {% for vid in quest.video.all %}
+
+            <div class="conrainer d-flex justify-content-center">
+                <div class="embed-responsive">
+                    <video src="{{vid.file.url}}" class="embed-responsive-item rounded" controls>
+                </div>
+            </div>
+
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if quest.reviews.first %}
+        <h2 class="text-center mt-5 mb-2 fw-bold">
+            Отзывы о данном маршруте
+        </h2>
+        <section class="gradient-custom">
+            <div class="container my-1 py-1">
+                {% for rew in quest.reviews.all %}
+                <div class="row d-flex justify-content-center my-2">
+                    <div class="col-md-12 col-lg-10 col-xl-8">
+                        <div class="card">
+                            <div class="card-body p-4">
+
+                                <div class="row">
+                                    <div class="col">
+                                        <div
+                                            class="d-flex align-items-md-start align-items-sm-center flex-sm-column flex-md-row">
+                                            <img class="rounded-circle shadow-1-strong me-md-3 me-sm-0"
+                                                src="{{rew.photo.url}}" alt="avatar" width="65" height="65" />
+                                            <div class="flex-grow-1 flex-shrink-1">
+                                                <div>
+                                                    <div
+                                                        class="d-flex justify-content-md-between justify-content-sm-center align-items-center">
+                                                        <p class="mb-1 fw-bold">
+                                                            {{rew.name}}
+                                                        </p>
+
+                                                    </div>
+                                                    <p class="small mb-0">
+                                                        {{rew.text}}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            </div>
+        </section>
+
+        {% endif %}
+
+        <div class="bg-light my-2 py-3">
+            <div class="container col-md-6 col-sm-12">
+                <h3 class="text-center my-3 fw-bold">
+                    Что нужно сделать, чтобы начать играть?
+                </h3>
+                <ol class="list-group list-group-light list-group-numbered">
+                    <li class="list-group-item">Нажимайте кнопку «оплатить»</li>
+                    <li class="list-group-item">Вам прийдет ссылка с оплатой в боте</li>
+                    <li class="list-group-item">После нее доступ откроется сразу же</li>
+                    <li class="list-group-item">Зовите друзей и близких и выходите играть!</li>
+                </ol>
+                <h5 class="text-dark my-3">Помимо маршрута к квесту придет инструкция для прохождения</h5>
+            </div>
+        </div>
+        <div class="d-grid gap-2 p-3">
+            <button class="btn btn-primary" type="button"
+                onclick="window.open('/quest/','_self','resizable=yes')">Вернуться в каталог</button>
+        </div>
+    </body>
+
+</html>

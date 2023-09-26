@@ -1,0 +1,90 @@
+{# Load the tag library #}
+{% load django_bootstrap5 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+
+
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Выбор квеста</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Finlandica:wght@400;500;600;700&display=swap');
+
+        .card:before {
+            content: "";
+            width: 100%;
+            height: 90%;
+            position: absolute;
+            top: 10%;
+            left: 0;
+            background: linear-gradient(179.94deg, rgba(51, 51, 51, 0) 24.15%, #333 61.26%);
+        }
+
+        .card-img-overlay {
+            position: absolute;
+            top: auto;
+            right: auto;
+            bottom: 0;
+            left: auto;
+            padding: 1rem;
+            border-radius: calc(.25rem - 1px);
+        }
+
+        .card {
+            height: 30em !important;
+        }
+
+        .card-img {
+            height: inherit !important;
+            object-fit: cover !important;
+            object-position: center !important;
+        }
+
+        * {
+            font-family: 'Finlandica', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+
+    <body>
+        <div class="container">
+            <div class='row'>
+                {% for el in quest %}
+                <div class="col-md-4 col-sm-12 p-3">
+                    <div class="card bg-dark text-white">
+                        <img src="{{el.main_photo.url}}" class="card-img" alt="Stony Beach" />
+                        <div class="card-img-overlay">
+                            <h4 class="card-title">{{el.name_rus}}</h4>
+                            <h6 class="card-text">
+                                {{el.description}}
+                            </h6>
+                            <h6 class="card-text mt-3">{{el.price}} Руб.</h6>
+                            <button class="btn btn-info"
+                                onclick="window.open('{{el.name}}','_self','resizable=yes')">Подробнее</button>
+
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </body>
+</html>
