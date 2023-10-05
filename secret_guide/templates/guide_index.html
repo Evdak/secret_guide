@@ -1,0 +1,160 @@
+{# Load the tag library #}
+{% load django_bootstrap5 %}
+
+{# Load CSS and JavaScript #}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
+{# Display django.contrib.messages as Bootstrap alerts #}
+{% bootstrap_messages %}
+{% load static %}
+
+
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Гайд</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Finlandica:wght@400;500;600;700&display=swap');
+
+        * {
+            font-family: 'Finlandica', sans-serif;
+        }
+    </style>
+
+
+    <style>
+        .house-card,
+        .service-card-wrapper {
+            transition: transform .2s;
+        }
+
+        .house-card:hover,
+        .service-card-wrapper:hover {
+            transform: scale(1.02);
+        }
+
+        .house-card .card-body {
+            background-color: #302A2A;
+            color: var(--bs-white);
+        }
+
+        .house-card .card-body h4.house-properties-title {
+            color: #C3C3C3;
+        }
+
+        .house-card .card-body p.house-properties-body {}
+
+
+
+        .owl-carousel .owl-dots .owl-dot.active span,
+        .owl-carousel .owl-dots .owl-dot:hover span {
+            background: #ffee95 !important;
+            transform: translate3d(0px, -50%, 0px) scale(0.7) !important;
+        }
+
+        .owl-carousel .owl-dots {
+            display: inline-block !important;
+            width: 100% !important;
+            text-align: center !important;
+        }
+
+        .owl-carousel .owl-dots .owl-dot {
+            display: inline-block !important;
+            margin-top: 2rem !important;
+        }
+
+        .owl-carousel .owl-dots .owl-dot span {
+            background: #ffee95 !important;
+            display: inline-block !important;
+            height: 2.5rem !important;
+            margin: 0 2px 5px !important;
+            transform: translate3d(0px, -50%, 0px) scale(0.3) !important;
+            transform-origin: 50% 50% 0 !important;
+            transition: all 250ms ease-out 0s !important;
+            width: 2.5rem !important;
+            border-radius: 50% !important;
+            border: 1px solid #000 !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+
+    <script>
+        jQuery(document).ready(function ($) {
+            "use strict";
+            $('.owl-carousel').owlCarousel({
+                margin: 10,
+                // loop: true,
+                // autoWidth: true,
+                dots: true,
+                autoHeight: true,
+                items: 2,
+                animateOut: 'fadeOut',
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    768: {
+                        items: 2
+                    },
+                    1170: {
+                        items: 3
+                    }
+                },
+            })
+        });
+    </script>
+
+    <body>
+        {% for item in data %}
+        <div class="container my-5">
+
+            <h1 class="text-center">{{item.category.title}}</h1>
+            <p class="text-center">{{item.category.description}}</p>
+
+
+            <div class="owl-carousel owl-theme mt-5">
+                {% for place in item.places %}
+
+                <div class="item">
+                    <div class="card house-card">
+                        <img class="card-img-top w-100 d-block fit-cover" src="{{ place.photo.url }}" />
+                        <div class="card-body p-4">
+                            <h3 class="card-title text-center">{{ place.title }}</h3>
+                            <div class="row mt-3">
+                                <h4 class="text-center house-properties-title">Адрес: <a
+                                        class="house-properties-body text-white"
+                                        href="{{place.map_url}}">{{place.address}}</a>
+                                </h4>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {% endfor %}
+            </div>
+
+        </div>
+        {% endfor %}
+    </body>
+
+</html>

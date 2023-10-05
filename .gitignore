@@ -110,3 +110,4 @@ database.db
 
 /data
 secret_guide/media
+secret_guide/db.sqlite3

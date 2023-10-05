@@ -19,6 +19,7 @@ CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=[])
 INSTALLED_APPS = [
     'kstati.apps.KstatiConfig',
     'quests.apps.QuestsConfig',
+    'guide.apps.GuideConfig',
     'django_bootstrap5',
     'django.contrib.admin',
     'django.contrib.auth',
