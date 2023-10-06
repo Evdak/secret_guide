@@ -14,7 +14,7 @@ services:
       - ./secret_guide/media:/srv/www/secret_guide/media
       - ./secret_guide/logs:/srv/www/secret_guide/logs
       - ./docker/nginx:/etc/nginx/conf.d
-      # - /etc/ssl/:/etc/ssl
+      - /etc/ssl/:/etc/ssl
     depends_on:
       - python
 
