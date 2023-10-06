@@ -1,3 +1,4 @@
+import logging
 from django.http import HttpRequest, HttpResponseNotFound, HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
